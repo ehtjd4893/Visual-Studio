@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="1011.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="10757.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -37,9 +34,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="9020.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="1085.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="3009.cpp">
@@ -67,6 +61,36 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="2447_rechallenge.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="1011.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="1085.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="2775.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="2839.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="bracket.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="2798.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="2231.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="7568.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="1018.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="1436.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
