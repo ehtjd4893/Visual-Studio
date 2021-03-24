@@ -1,79 +1,37 @@
 #include <iostream>
+
 using namespace std;
 
-int n, result;
-bool visited[15][15] = {
-	{0,}, {0,}, {0,}, {0,}, {0,},
-	{0,}, {0,}, {0,}, {0,}, {0,},
-	{0,}, {0,}, {0,}, {0,}, {0,}
-};
-void print() {
-	for (int i = 1; i <= n; i++) {
-		for (int k = 1; k <= n; k++) {
-			cout << visited[i][k] << " ";
-		}
-		cout << endl;
+int arr[15] = { 0, };
+int n;
+int result = 0;
+bool promising(int x) {
+	for (int i = 0; i < x; i++) {
+		if (arr[x] == arr[i])	// y좌표가 같은 값이 있으면 탈락
+			return false;
+		if(abs(arr[x]-arr[i]) == x-i)	// 대각선에 있으면 탈락
+			return false;
 	}
+	return true;
 }
 
-void func(int cnt) {
+void queen(int cnt) {
 	if (cnt == n) {
-		bool exist = false;
-		for (int i = 1; i <= n; i++) {
-			for (int k = 1; k <= n; k++) {
-				if (!visited[i][k]) {
-					exist = true;
-					break;
-				}
-			}
-		}
-		if (exist)
-			result++;
+		result++;
 		return;
 	}
-	for (int i = 1; i <= n; i++) {
-		for (int k = 1; k <= n; k++) {
-			if (!visited[i][k]) {
-				visited[i][k] = true;
-				int i_tmp = i;
-				int k_tmp = k;
-				while (i_tmp-- && k_tmp--) {
-					visited[i_tmp][k_tmp] = true;
-				}
-				i_tmp = i;
-				k_tmp = k;
-				while (i_tmp++ <= n && k_tmp++ <= n) {
-					visited[i_tmp][k_tmp] = true;
-				}
-				i_tmp = i;
-				for (int a = 1; a <= n; a++) {
-					visited[a][k] = true;
-				}
-				k_tmp = k;
-				for (int a = 1; a <= n; a++) {
-					visited[i][a] = true;
-				}
-				
-				//cout << "-----" << k << ", " << i << "------" << endl;
-				//print();
-				//cout << "-----" << k << ", " << i << "------" << endl;
-				func(cnt + 1);
-			}
-		}
-	}
-
+	for (int i = 0; i < n; i++) {
+		arr[cnt] = i;		// cnt는 x좌표를 의미함.
+		if (promising(cnt))	// 현재의 x좌표에서 y좌표를 옮겨가며 괜찮은지 확인
+			queen(cnt + 1);	// 괜찮은 자리가 존재하면 다음 x좌표의 자리를 찾는다
+	}						// 그렇지 않는다면 자리를 찾다가 못 찾고 전단계로 백트래킹
 }
+
+
 
 int main() {
 	cin >> n;
-	//cout << "---------시작 전----------" << endl;
-	//print();
-	func(0);
-
-	//cout << "---------종료 후----------" << endl;
-	//print();
-	
-
-	cout << result << "\n";
+	queen(0);
+	cout << result;
 	return 0;
 }
