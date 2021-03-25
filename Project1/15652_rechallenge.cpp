@@ -17,11 +17,14 @@ void backTracking(int cnt) {
 	}
 
 	for (int k = 1; k <= n; k++) {
-		if (cnt == 0)
+		if (cnt == 0) {
 			arr[cnt] = k;
-		else if(arr[cnt-1] <= k)
+			backTracking(cnt + 1);
+		}
+		else if (arr[cnt - 1] <= k) {
 			arr[cnt] = k;
-		backTracking(cnt + 1);
+			backTracking(cnt + 1);
+		}			
 	}
 }
 
