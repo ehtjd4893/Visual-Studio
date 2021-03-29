@@ -1,53 +1,55 @@
 #include <iostream>
 #include <cmath>
+#include <vector>
 using namespace std;
-int score[21][21];
+int score[20][20];
 int dif = 9999999;
 int n;
-bool isTeam[21][21];
+bool isTeam[20] = {0,};
 
-void func(int row, int col, int cnt_start, int cnt_link) {
-	if (cnt_start == cnt_link && cnt_link == n / 2) {
+void func(int idx, int cnt) {
+	if (cnt == n / 2) {
+		vector<int> start;
+		vector<int> link;
 		int sum_start = 0;
 		int sum_link = 0;
-		for (int i = 1; i <= n; i++) {
-			for (int k = 1; k <= n; k++) {
-				if (k != i) {
-					if (isTeam[i][k] && isTeam[k][i])
-						sum_start += (score[i][k] + score[k][i]);
-					if (!isTeam[i][k] && !isTeam[k][i])
-						sum_link += (score[i][k] + score[k][i]);
-				}
+		for (int i = 0; i < n; i++) {
+			if (isTeam[i])
+				start.push_back(i);
+			else
+				link.push_back(i);
+		}
+		for (int i = 0; i < n / 2; i++) {
+			for (int k = 0; k < n / 2; k++) {
+				sum_start += score[start[i]][start[k]];
+				sum_link += score[link[i]][link[k]];
 			}
 		}
-		cout << sum_start << " - " << sum_link << " = ";
-		if (dif > abs(sum_start - sum_link))
+		if (abs(sum_start - sum_link) < dif)
 			dif = abs(sum_start - sum_link);
 		return;
 	}
-	if (row != col) {
-		if (cnt_start < n / 2) {
-			isTeam[row][col] = true;
-			func((row + 1) % n, (row + 1) / n + col, cnt_start + 1, cnt_link);
-			
-		}if (cnt_link < n / 2) {
-			func((row + 1) % n, (row + 1) / n + col, cnt_start, cnt_link + 1);
+	for (int i = idx; i < n; i++) {
+		if (!isTeam[i]) {
+			isTeam[i] = true;
+			func(i, cnt + 1);
+			isTeam[i] = false;
 		}
+
 	}
-	else {
-		func((row + 1) % n, (row + 1) / n + col, cnt_start, cnt_link);
-	}
+
 }
 
-int main() {
-	ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 
+int main() {
+	ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+		
 	cin >> n;
-	for (int i = 1; i <= n; i++)		// row
-		for (int k = 1; k <= n; k++)	// column
+	for (int i = 0; i < n; i++)		
+		for (int k = 0; k < n; k++)	
 			cin >> score[i][k];
 
-	func(1,1,0,0);
+	func(0,0);
 	cout << dif;
 
 	return 0;
