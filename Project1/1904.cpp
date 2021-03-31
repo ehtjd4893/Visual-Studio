@@ -7,18 +7,14 @@ int main() {
 	int n;
 	cin >> n;
 	arr[0] = 0;
-	arr[1] = 2;
+	arr[1] = 1;
 	arr[2] = 2;
-	arr[3] = 3;
-	arr[4] = 5;
-	arr[5] = 7;
-	arr[6] = 10;
-	arr[7] = 17;
-	arr[8] = 
-	// n % 2 = 0 ÀÌ¸é, arr[n] = arr[n-1] + arr[n-2]
-
-
-
+	int tmp;
+	for (int i = 3; i < 1000001; i++) {
+		tmp = arr[i - 1] + arr[i - 2];
+		arr[i] = tmp % 15746;
+	}
+	cout << arr[n];
 
 	return 0;
 }
