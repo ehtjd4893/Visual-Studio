@@ -21,12 +21,12 @@ int main() {
 	}
 	num.push_back(stoi(str.substr(begin, str.size()), nullptr, 10));
 
-	for (int i = 0; i < num.size(); i++) {
-		if (i % 2 == 0)
-			cout << num[i] << " ";
-		else
-			cout << (char)num[i] << " ";
-	}
+	//for (int i = 0; i < num.size(); i++) {
+	//	if (i % 2 == 0)
+	//		cout << num[i] << " ";
+	//	else
+	//		cout << (char)num[i] << " ";
+	//}
 
 	for (int i = 1; i < num.size(); i += 2) {
 		if ((char)num[i] == '-') {
@@ -35,11 +35,14 @@ int main() {
 			}
 		}
 	}
-	int sum = 0;
-	for (int i = 1; i < num.size(); i+=2) {
-		if ((char)num[i] == '-')
-			sum += num[i-1] 
+	int sum = num[0];
+	for (int i = 2; i < num.size(); i+=2) {
+		if ((char)num[i - 1] == '-')
+			sum -= num[i];
+		else
+			sum += num[i];
 	}
+	cout << sum;
 
 	return 0;
 }
