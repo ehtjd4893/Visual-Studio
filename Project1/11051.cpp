@@ -1,31 +1,24 @@
 #include <iostream>
 
 using namespace std;
-
-int fact(int a) {
-	if (a == 0)
-		return 1;
-	long long result = 1;
-	for (int i = 2; i <= a; i++) {
-		result *= i;
-		result %= 10007;
-	}
-	return result;
-}
+int dp[1001][1001];
 
 int main() {
 	int n, k;
 	cin >> n >> k;
-	if (k == 0)
-		cout << 1;
-	if (k < 0)
-		cout << 0;
-	else if (n - k < 0)
-		cout << 0;
-	else {
-		int result;
-		result = (fact(n)) / (fact(k) * fact(n - k));
-		cout << result;
+
+	dp[0][0] = 1;
+	for (int i = 1; i <= n; i++) {
+		dp[i][0] = 1;
+		dp[i][i] = 1;
 	}
+
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= k; j++) {
+			dp[i][j] = (dp[i - 1][j - 1] + dp[i - 1][j]) % 10007;
+		}
+	}
+	cout << dp[n][k];
+
 	return 0;
 }
