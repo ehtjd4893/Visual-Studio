@@ -1,29 +1,20 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
-int dp[501];
 
 int main() {
 
 	int n;
 	cin >> n;
 	int cnt = 0;
+	int tmp = 1;
 	for (int i = 1; i <= n; i++) {
-
-		if (i % 5 == 0)
+		tmp = i;
+		while (tmp % 5 == 0) {
 			cnt++;
+			tmp /= 5;
+		}
 	}
-	cout << tmp << " ";
-	cout << cnt;
-	//while (true) {
-	//	if (dp[n] % i != 0) {
-	//		cout << cnt;
-	//		return 0;
-	//	}
-	//	cnt++;
-	//	i *=10;
-	//}
-
+	cout << cnt << endl;
 	return 0;
 }
