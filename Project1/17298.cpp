@@ -1,30 +1,33 @@
 #include <iostream>
 #include <vector>
+#include <stack>
 using namespace std;
 
 int main() {
+	ios_base::sync_with_stdio(0); cin.tie(NULL); cout.tie(NULL);
 	int n;
 	cin >> n;
-	vector<int> vec;
+	vector<int> vec(n);
+	stack<int> stk;
 	int tmp;
 	for (int i = 0; i < n; i++) {
-		cin >> tmp;
-		vec.push_back(tmp);
+		cin >> vec[i];
 	}
 
-	vector<int> result;
-	
-	for (int i = 0; i < n; i++) {
-		
-		for(int j = i+1; j < n; j++){
-			if (vec[i] < vec[j]) {
-				result.push_back(vec[j]);
-				break;
-			}
+	vector<int> result(n,-1);
+	for (int i = 0; i < n;i++) {
+		while (!stk.empty() && vec[i] > vec[stk.top()] ) {
+			result[stk.top()] = vec[i];
+			stk.pop();
 		}
-		if (i == n - 1)
-			result.push_back(-1);
+		stk.push(i);
 	}
-	for (int i = 0; i < n; i++) {}
+
+	for (int i = 0; i < n; i++) {
+		cout << result[i] << " ";
+	}
+	cout << "\n";
+
+
 	return 0;	
 }
