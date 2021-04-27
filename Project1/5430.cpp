@@ -4,43 +4,42 @@
 using namespace std;
 
 int main() {
-	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+	//ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 	int t;
 	cin >> t;
-	while(t--) {
+	while (t--) {
 		string p;
 		cin >> p;
-
 		int n;
 		cin >> n;
+		string arr;
+		cin >> arr;
 
-
-		deque<string> dq;
-		string s;
-		for (int i = 0; i < n; i++) {
-			if(i != n-1)
-				getline(cin, s, ',');
-			else {
-				getline(cin, s, ']');
-			}
+		deque<int> dq;
+		string tmp = "";
+		for (int i = 0; i < arr.size();i++) {
+			
 			if (i == 0)
-				dq.push_back(s.substr(2, s.size()));
-			else if (i == n - 1)
-				dq.push_back(s.substr(0, s.size()));
-			else
-				dq.push_back(s);
-			/*cout << dq.back() << endl;*/
-		}
-		
-		bool reverse = false;
-		bool error = false;
-		if (n == 0) {
-			cin >> s;
-		}
-		for (int i = 0; i < p.size(); i++) {
-			if (p.at(i) == 'R') {
-				reverse = !reverse;
+				continue;
+			else if(arr.at(i) >= '0' && arr.at(i) <= '9'){
+				tmp += arr.at(i);
 			}
+			else {
+				if (tmp == "") {
+					break;
+				}
+				else {
+					dq.push_back(stoi(tmp));
+					tmp = "";
+				}
+			}
+		}
+
+		bool reverse = false;
+		bool print = true;
+		for (int i = 0; i < p.size(); i++) {
+			if (p.at(i) == 'R')
+				reverse = !reverse;
 			else {
 				if (!dq.empty()) {
 					if (!reverse)
@@ -49,46 +48,37 @@ int main() {
 						dq.pop_back();
 				}
 				else {
+					print = false;
 					cout << "error\n";
-					error = true;
+					break;
 				}
 			}
-
-
 		}
-		if (error) {}
-		else if ((!error && n == 0) || dq.empty()) {
-			cout << "[]\n";
-		}
-		else if (!reverse) {
-			for (int i = 0; i < dq.size(); i++) {
-				if(i == 0)
-					cout << "[";
-				cout << dq.at(i);
-				if (i < dq.size() - 1)
-					cout << ",";
-				else
-					cout << "]\n";
+		if (print) {
+			cout << "[";
+			if (!reverse) {
+				while (!dq.empty()){
+					cout << dq.front();
+					dq.pop_front();
+					if (!dq.empty())
+						cout << ",";
+
+				}
 			}
-		}
-		else {
-			for (int i = dq.size()-1; i >= 0; i--) {
-				if (i == dq.size()-1)
-					cout << "[";
-				cout << dq.at(i);
-				if (i != 0)
-					cout << ",";
-				else
-					cout << "]\n";
+			else {
+				while (!dq.empty()) {
+					cout << dq.back();
+					dq.pop_back();
+					if (!dq.empty())
+						cout << ",";
+
+				}
+				
 			}
+			cout << "]\n";
 		}
 
-
-		
-	
-	
 	}
-
 
 	return 0;
 }
