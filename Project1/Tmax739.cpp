@@ -3,7 +3,7 @@
 #include <stack>
 using namespace std;
 
-class Solution {
+class Solution { 
 public:
     vector<int> dailyTemperatures(vector<int>& t) {
        vector<int> answer(t.size(), 0);    // answer 벡터를 t.size() 개수만큼 생성하여 0으로 초기화
